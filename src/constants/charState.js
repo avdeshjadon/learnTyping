@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// LearnTyping -- Browser-Based Typing Practice & Training Application
+// PracticeTyping -- Browser-Based Typing Practice & Training Application
 // ----------------------------------------------------------------------------
 // Author   : Avdesh Jadon
 // GitHub   : https://github.com/avdeshjadon

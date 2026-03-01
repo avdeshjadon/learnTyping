@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// LearnTyping -- Browser-Based Typing Practice & Training Application
+// PracticeTyping -- Browser-Based Typing Practice & Training Application
 // ----------------------------------------------------------------------------
 // Author   : Avdesh Jadon
 // GitHub   : https://github.com/avdeshjadon
@@ -72,7 +72,7 @@ export default function Header({ mode, length, onSwitchMode, onSwitchLength, sho
     <header className="app-header" style={headerStyle}>
       <div className="app-logo" style={logoStyle}>
         <img src="/favicon.svg" alt="" style={{ width: 26, height: 26, marginRight: 8, verticalAlign: 'middle' }} />
-        LearnTyping
+        PracticeTyping
       </div>
       <nav style={navStyle}>
         {MODES.map((m) => (
@@ -115,7 +115,7 @@ export default function Header({ mode, length, onSwitchMode, onSwitchLength, sho
         </svg>
       </button>
       )}
-      <div style={controlsStyle}>
+      <div className="header-controls" style={controlsStyle}>
         <div style={lengthGroupStyle}>
           {["short", "medium", "long"].map((l) => (
             <button

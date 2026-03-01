@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// LearnTyping -- Browser-Based Typing Practice & Training Application
+// PracticeTyping -- Browser-Based Typing Practice & Training Application
 // ----------------------------------------------------------------------------
 // Author   : Avdesh Jadon
 // GitHub   : https://github.com/avdeshjadon
@@ -87,6 +87,25 @@ export default function GlobalStyles() {
       ::-webkit-scrollbar { display: none; }
       * { scrollbar-width: none; }
 
+      .app-header nav,
+      .app-header .header-controls {
+        opacity: 1;
+        max-height: 120px;
+        overflow: visible;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0px);
+        transition:
+          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .app-logo {
+        opacity: 1;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
       /* ── Zen mode: hide header & footer (keyboard stays) ── */
       .app-header,
       .app-footer {
@@ -105,14 +124,29 @@ export default function GlobalStyles() {
       }
 
       .zen-mode .app-header {
-        opacity: 0;
         pointer-events: none;
-        max-height: 0;
-        transform: translate3d(0, -20px, 0);
-        filter: blur(8px);
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
         border-color: transparent !important;
+      }
+
+      /* Hide everything in header except the logo during zen mode */
+      .zen-mode .app-header nav,
+      .zen-mode .app-header .header-controls {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transform: translate3d(0, -10px, 0);
+        filter: blur(8px);
+        transition:
+          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Keep logo visible but very subtle */
+      .zen-mode .app-logo {
+        opacity: 0.25;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .zen-mode .app-footer {
