@@ -50,12 +50,15 @@ export const headerStyle = {
 };
 
 export const logoStyle = {
-  fontSize: 22,
-  fontWeight: 700,
+  fontSize: 30,
+  fontWeight: 400,
+  fontFamily: "'Roboto Mono', 'JetBrains Mono', monospace",
   color: TOKENS.yellow,
-  letterSpacing: "0.15em",
+  letterSpacing: "normal",
   textTransform: "lowercase",
   marginRight: 8,
+  display: "flex",
+  alignItems: "center",
 };
 
 export const navStyle = { display: "flex", gap: 4, flex: 1, flexWrap: "wrap" };
@@ -219,12 +222,13 @@ export const startHintStyle = {
 // ─── Text display ───────────────────────────────────────────────────────────
 
 export const textAreaStyle = {
-  fontSize: 32,
+  fontSize: 37,
   fontWeight: 400,
   fontFamily: "'Roboto Mono', 'JetBrains Mono', monospace",
-  lineHeight: 1.65,
-  letterSpacing: "0.01em",
+  lineHeight: "37px",
+  letterSpacing: "normal",
   maxHeight: 320,
+  minHeight: 111 /* ensures 3 lines minimum */,
   overflowY: "auto",
   overflowX: "hidden",
   textAlign: "left",

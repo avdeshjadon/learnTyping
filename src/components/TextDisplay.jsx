@@ -95,27 +95,40 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
 
   return (
     <>
-      {!started && (
-        <div className="start-hint" style={startHintStyle}>start typing to begin</div>
-      )}
+      <div style={{ position: "relative", height: 35, width: "100%", marginBottom: 12 }}>
+        {!started && (
+          <div className="start-hint" style={{
+            ...startHintStyle,
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            margin: 0
+          }}>
+            start typing to begin
+          </div>
+        )}
 
-      {started && (
-        <div className="live-stats" style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          width: "100%",
-          gap: 28,
-          marginBottom: 12,
-          fontSize: 24,
-          fontFamily: "'Roboto Mono', monospace",
-          letterSpacing: "0.06em",
-          opacity: 0.85,
-          color: "#E2B715",
-          transition: "opacity 0.3s ease",
-        }}>
-          <span>{elapsed}</span>
-        </div>
-      )}
+        {started && (
+          <div className="live-stats" style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            width: "100%",
+            gap: 28,
+            fontSize: 24,
+            fontFamily: "'Roboto Mono', monospace",
+            letterSpacing: "0.06em",
+            opacity: 0.85,
+            color: "#E2B715",
+            transition: "opacity 0.3s ease",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            margin: 0
+          }}>
+            <span>{elapsed}</span>
+          </div>
+        )}
+      </div>
 
       <div ref={textRef} className="typing-text" style={textAreaStyle}>
         {/* Floating smooth cursor */}
@@ -215,17 +228,17 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
           </button>
         )}
 
-        {!started && (
-          <div style={{
-            textAlign: "center",
-            fontSize: 11,
-            color: "#656669",
-            letterSpacing: "0.08em",
-            opacity: 0.7,
-          }}>
-            esc - <span style={{color: "#E2B715"}}>reset</span> &nbsp;·&nbsp; tab - <span style={{color: "#E2B715"}}>switch mode</span>
-          </div>
-        )}
+        <div style={{
+          textAlign: "center",
+          fontSize: 11,
+          color: "#656669",
+          letterSpacing: "0.08em",
+          opacity: 0.7,
+          visibility: started ? "hidden" : "visible",
+          height: started ? 0 : "auto", /* prevents pushing restart button out of place */
+        }}>
+          esc - <span style={{color: "#E2B715"}}>reset</span> &nbsp;·&nbsp; tab - <span style={{color: "#E2B715"}}>switch mode</span>
+        </div>
       </div>
     </>
   );

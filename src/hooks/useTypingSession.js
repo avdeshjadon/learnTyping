@@ -88,8 +88,8 @@ export default function useTypingSession() {
 
   // ── Reset session ──
   const resetSession = useCallback((newMode, newLength) => {
-    const m = newMode || modeRef.current;
-    const l = newLength || lengthRef.current;
+    const m = newMode !== undefined ? newMode : modeRef.current;
+    const l = newLength !== undefined ? newLength : lengthRef.current;
     const s = getRandomStory(m.id, l);
 
     setStory(s);

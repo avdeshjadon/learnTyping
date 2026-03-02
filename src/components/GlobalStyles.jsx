@@ -108,8 +108,14 @@ export default function GlobalStyles() {
       .app-logo {
         opacity: 1;
         transform: translate3d(0, 0, 0);
-        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 20;
+      }
+      .app-logo img {
+        transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       /* ── Zen mode: hide header & footer (keyboard stays) ── */
@@ -152,8 +158,15 @@ export default function GlobalStyles() {
       /* Keep logo visible but very faded, exactly where it is */
       .zen-mode .app-logo {
         opacity: 0.15 !important;
+        color: #656669 !important;
         transform: translate3d(0, 0, 0);
-        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .zen-mode .app-logo img {
+        filter: grayscale(100%);
       }
 
       .zen-mode .app-footer {

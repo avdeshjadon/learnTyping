@@ -91,7 +91,7 @@ export default function Header({ mode, length, onSwitchMode, onSwitchLength, sho
   return (
     <header className="app-header" style={headerStyle}>
       <div className="app-logo" style={logoStyle}>
-        <img src="/favicon.svg" alt="" style={{ width: 26, height: 26, marginRight: 8, verticalAlign: 'middle' }} />
+        <img src="/favicon.svg" alt="" style={{ width: 28, height: 28, marginRight: 8, verticalAlign: 'middle' }} />
         PracticeTyping
       </div>
       <nav style={navStyle}>
@@ -136,7 +136,7 @@ export default function Header({ mode, length, onSwitchMode, onSwitchLength, sho
       </nav>
       {!isTyping && (
         <button
-          onClick={onNextStory}
+          onClick={() => onNextStory()}
           title="Next story"
         style={{
           background: "none",

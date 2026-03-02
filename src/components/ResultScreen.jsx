@@ -60,10 +60,10 @@ export default function ResultScreen({ wpm, accuracy, elapsed, errors, onRetry, 
       </div>
 
       <div style={resultActionsStyle}>
-        <button onClick={onRetry} style={resultBtnStyle}>
+        <button onClick={() => onRetry()} style={resultBtnStyle}>
           try again
         </button>
-        <button onClick={onNextStory} style={{ ...resultBtnStyle, ...resultBtnSecondaryStyle }}>
+        <button onClick={() => onNextStory()} style={{ ...resultBtnStyle, ...resultBtnSecondaryStyle }}>
           next story →
         </button>
       </div>
