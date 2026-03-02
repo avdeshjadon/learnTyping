@@ -14,7 +14,6 @@ A sleek, MonkeyType-inspired typing practice app built with React + Vite. Improv
 - **3 Text Lengths** -- short (~150 chars), medium (~280), long (~450)
 - **Live Stats** -- real-time WPM and elapsed time while typing
 - **Smart Cursor** -- smooth linear-gliding cursor with character-level tracking
-- **On-Screen Keyboard** -- toggleable visual keyboard with active-key highlighting
 - **Zen Mode** -- UI fades away as you type; logo stays visible at low opacity
 - **Keyboard Shortcuts** -- `Esc` to restart, `Tab` to switch modes
 - **Result Screen** -- WPM, accuracy, time, errors with retry & next story options
@@ -50,26 +49,25 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Scripts
 
-| Command             | Description                |
-| ------------------- | -------------------------- |
-| `npm run dev`       | Start dev server with HMR  |
-| `npm run build`     | Production build to `dist/`|
-| `npm run preview`   | Preview production build   |
-| `npm run lint`      | Run ESLint                 |
+| Command           | Description                 |
+| ----------------- | --------------------------- |
+| `npm run dev`     | Start dev server with HMR   |
+| `npm run build`   | Production build to `dist/` |
+| `npm run preview` | Preview production build    |
+| `npm run lint`    | Run ESLint                  |
 
 ## Project Structure
 
 ```
 src/
-├── components/        # UI components (Header, TextDisplay, VisualKeyboard, ResultScreen, Footer)
+├── components/        # UI components (Header, TextDisplay, ResultScreen, Footer)
 ├── constants/         # Character states, design tokens
 ├── data/
 │   ├── modes.js       # Mode definitions (id, label, keys)
-│   ├── keyboardLayout.js
 │   └── stories/       # Story pools per mode (homeHalf, homeFull, top, bottom, numbers, full)
 ├── hooks/
 │   └── useTypingSession.js  # Core typing logic, stats, keyboard handling
-├── styles/            # Style objects (app, keyboard, result)
+├── styles/            # Style objects (app, result)
 ├── utils/             # getRandomStory, formatTime
 ├── App.jsx
 ├── TypingTrainer.jsx  # Main app orchestrator
