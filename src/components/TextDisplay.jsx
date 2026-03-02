@@ -194,12 +194,13 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
 
       <div style={{
           marginTop: 48,
+          position: "relative",
+          height: 40,
+          width: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 16,
+          justifyContent: "center",
+          alignItems: "center"
       }}>
-        {started && (
           <button
             onClick={(e) => { e.preventDefault(); onRestart(); }}
             className="restart-btn"
@@ -213,10 +214,13 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
               fontSize: 20,
               lineHeight: 1,
               borderRadius: 4,
-              transition: "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              transition: "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              position: "absolute",
+              opacity: started ? 1 : 0,
+              pointerEvents: started ? "auto" : "none"
             }}
             onMouseEnter={(e) => { e.currentTarget.style.color = '#E2B715'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = '#656669'; }}
@@ -226,16 +230,16 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
             </svg>
           </button>
-        )}
 
         <div style={{
           textAlign: "center",
           fontSize: 11,
           color: "#656669",
           letterSpacing: "0.08em",
-          opacity: 0.7,
-          visibility: started ? "hidden" : "visible",
-          height: started ? 0 : "auto", /* prevents pushing restart button out of place */
+          opacity: started ? 0 : 0.7,
+          transition: "opacity 0.3s ease",
+          position: "absolute",
+          pointerEvents: "none"
         }}>
           esc - <span style={{color: "#E2B715"}}>reset</span> &nbsp;·&nbsp; tab - <span style={{color: "#E2B715"}}>switch mode</span>
         </div>
