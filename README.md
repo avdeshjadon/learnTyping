@@ -74,7 +74,7 @@ src/
 └── main.jsx           # Entry point
 ```
 
-## How It Works
+## How It Works 
 
 1. **Pick a mode** from the navbar (or press `Tab` to cycle)
 2. **Choose length** -- short, medium, or long

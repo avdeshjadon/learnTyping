@@ -50,7 +50,7 @@ export const headerStyle = {
 };
 
 export const logoStyle = {
-  fontSize: 30,
+  fontSize: 28,
   fontWeight: 400,
   fontFamily: "'Roboto Mono', 'JetBrains Mono', monospace",
   color: TOKENS.yellow,
@@ -264,6 +264,9 @@ export const footerStyle = {
   position: "absolute",
   bottom: 0,
   left: 0,
+  right: 0, // Ensure it spans across to help centering
+  margin: "0 auto", // Center it horizontally
+  maxWidth: 1300, // Match max-width of header
   width: "100%",
 };
 
