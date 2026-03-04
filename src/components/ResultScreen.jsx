@@ -32,7 +32,15 @@ import {
   resultModeStyle,
 } from "../styles/resultStyles";
 
-export default function ResultScreen({ wpm, accuracy, elapsed, errors, onRetry, onNextStory, mode }) {
+export default function ResultScreen({
+  wpm,
+  accuracy,
+  elapsed,
+  errors,
+  onRetry,
+  onNextStory,
+  mode,
+}) {
   return (
     <div className="result-screen" style={resultScreenStyle}>
       <div style={resultTitleStyle}>session complete</div>
@@ -63,7 +71,10 @@ export default function ResultScreen({ wpm, accuracy, elapsed, errors, onRetry, 
         <button onClick={() => onRetry()} style={resultBtnStyle}>
           try again
         </button>
-        <button onClick={() => onNextStory()} style={{ ...resultBtnStyle, ...resultBtnSecondaryStyle }}>
+        <button
+          onClick={() => onNextStory()}
+          style={{ ...resultBtnStyle, ...resultBtnSecondaryStyle }}
+        >
           next story →
         </button>
       </div>

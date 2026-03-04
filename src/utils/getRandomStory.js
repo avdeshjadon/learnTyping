@@ -34,7 +34,11 @@ export default function getRandomStory(modeId, length = "medium") {
   text = text.slice(0, target);
 
   // Try to cut at a sentence boundary (. or ;) for a cleaner ending
-  const lastSentence = Math.max(text.lastIndexOf(". "), text.lastIndexOf("; "), text.lastIndexOf("."));
+  const lastSentence = Math.max(
+    text.lastIndexOf(". "),
+    text.lastIndexOf("; "),
+    text.lastIndexOf("."),
+  );
   if (lastSentence > target * 0.5) {
     text = text.slice(0, lastSentence + 1);
   } else {

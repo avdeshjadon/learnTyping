@@ -39,7 +39,17 @@ import {
   startHintStyle,
 } from "../styles/appStyles";
 
-export default function TextDisplay({ mode, story, charStates, cursor, started, wpm, elapsed, onRestart, onNextStory }) {
+export default function TextDisplay({
+  mode,
+  story,
+  charStates,
+  cursor,
+  started,
+  wpm,
+  elapsed,
+  onRestart,
+  onNextStory,
+}) {
   const textRef = useRef(null);
   const cursorRef = useRef(null);
 
@@ -75,7 +85,10 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
     // Vertical auto-scroll: keep the current line roughly centred
     const charTopInContainer = charRect.top - containerRect.top;
     const visibleHeight = container.clientHeight;
-    if (charTopInContainer < 0 || charTopInContainer > visibleHeight - charRect.height) {
+    if (
+      charTopInContainer < 0 ||
+      charTopInContainer > visibleHeight - charRect.height
+    ) {
       container.scrollTo({
         top: top - visibleHeight / 2 + charRect.height / 2,
         behavior: "smooth",
@@ -95,36 +108,49 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
 
   return (
     <>
-      <div style={{ position: "relative", height: 35, width: "100%", marginBottom: 12 }}>
+      <div
+        style={{
+          position: "relative",
+          height: 35,
+          width: "100%",
+          marginBottom: 12,
+        }}
+      >
         {!started && (
-          <div className="start-hint" style={{
-            ...startHintStyle,
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            margin: 0
-          }}>
+          <div
+            className="start-hint"
+            style={{
+              ...startHintStyle,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              margin: 0,
+            }}
+          >
             start typing to begin
           </div>
         )}
 
         {started && (
-          <div className="live-stats" style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            width: "100%",
-            gap: 28,
-            fontSize: 24,
-            fontFamily: "'Roboto Mono', monospace",
-            letterSpacing: "0.06em",
-            opacity: 0.85,
-            color: "#E2B715",
-            transition: "opacity 0.3s ease",
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            margin: 0
-          }}>
+          <div
+            className="live-stats"
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              width: "100%",
+              gap: 28,
+              fontSize: 24,
+              fontFamily: "'Roboto Mono', monospace",
+              letterSpacing: "0.06em",
+              opacity: 0.85,
+              color: "#E2B715",
+              transition: "opacity 0.3s ease",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              margin: 0,
+            }}
+          >
             <span>{elapsed}</span>
           </div>
         )}
@@ -153,11 +179,17 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
                   data-idx={spaceIdx}
                   style={{
                     ...charStyle,
-                    ...(spaceState === CHAR_STATE.CORRECT ? charCorrectStyle : {}),
+                    ...(spaceState === CHAR_STATE.CORRECT
+                      ? charCorrectStyle
+                      : {}),
                     ...(spaceState === CHAR_STATE.WRONG ? charWrongStyle : {}),
-                    ...(spaceState === CHAR_STATE.REVIEW ? charReviewStyle : {}),
+                    ...(spaceState === CHAR_STATE.REVIEW
+                      ? charReviewStyle
+                      : {}),
                   }}
-                >{" "}</span>
+                >
+                  {" "}
+                </span>,
               );
             }
 
@@ -177,14 +209,16 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
                     ...(state === CHAR_STATE.WRONG ? charWrongStyle : {}),
                     ...(state === CHAR_STATE.REVIEW ? charReviewStyle : {}),
                   }}
-                >{word[j]}</span>
+                >
+                  {word[j]}
+                </span>,
               );
             }
 
             elements.push(
               <span key={`w${startIdx}`} style={{ whiteSpace: "nowrap" }}>
                 {charSpans}
-              </span>
+              </span>,
             );
           });
 
@@ -192,56 +226,78 @@ export default function TextDisplay({ mode, story, charStates, cursor, started, 
         })()}
       </div>
 
-      <div style={{
+      <div
+        style={{
           marginTop: 48,
           position: "relative",
           height: 40,
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
-      }}>
-          <button
-            onClick={(e) => { e.preventDefault(); onRestart(); }}
-            className="restart-btn"
-            title="Restart same text"
-            style={{
-              background: "none",
-              border: "none",
-              color: "#656669",
-              cursor: "pointer",
-              padding: "8px",
-              fontSize: 20,
-              lineHeight: 1,
-              borderRadius: 4,
-              transition: "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "absolute",
-              opacity: started ? 1 : 0,
-              pointerEvents: started ? "auto" : "none"
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#E2B715'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#656669'; }}
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            onRestart();
+          }}
+          className="restart-btn"
+          title="Restart same text"
+          style={{
+            background: "none",
+            border: "none",
+            color: "#656669",
+            cursor: "pointer",
+            padding: "8px",
+            fontSize: 20,
+            lineHeight: 1,
+            borderRadius: 4,
+            transition:
+              "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            opacity: started ? 1 : 0,
+            pointerEvents: started ? "auto" : "none",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#E2B715";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#656669";
+          }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M23 4v6h-6" />
-              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-            </svg>
-          </button>
+            <path d="M23 4v6h-6" />
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+          </svg>
+        </button>
 
-        <div style={{
-          textAlign: "center",
-          fontSize: 11,
-          color: "#656669",
-          letterSpacing: "0.08em",
-          opacity: started ? 0 : 0.7,
-          transition: "opacity 0.3s ease",
-          position: "absolute",
-          pointerEvents: "none"
-        }}>
-          esc - <span style={{color: "#E2B715"}}>reset</span> &nbsp;·&nbsp; tab - <span style={{color: "#E2B715"}}>switch mode</span>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: 11,
+            color: "#656669",
+            letterSpacing: "0.08em",
+            opacity: started ? 0 : 0.7,
+            transition: "opacity 0.3s ease",
+            position: "absolute",
+            pointerEvents: "none",
+          }}
+        >
+          esc - <span style={{ color: "#E2B715" }}>reset</span> &nbsp;·&nbsp;
+          tab - <span style={{ color: "#E2B715" }}>switch mode</span>
         </div>
       </div>
     </>

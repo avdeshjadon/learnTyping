@@ -27,22 +27,92 @@ export default function GlobalStyles() {
   return (
     <style>{`
       @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+      
+      :root {
+        --bg: #333437;
+        --surface: #3a3b3e;
+        --border: #48494c;
+        --borderLight: #434447;
+        --navBorder: rgba(255, 255, 255, 0.06);
+        --text: #f7f7f7;
+        --dim: #646669;
+        --dimLight: #909194;
+        --dimDark: #555658;
+        --dimMid: #7a7b7e;
+        --muted: #4a4b4e;
+        --statText: #a0a1a4;
+        --green: #E2B715;
+        --red: #fba4a4;
+        --yellow: #E2B715;
+        
+        --charNeutral: #656669;
+        --charCorrect: #D1D0C5;
+        --charWrongDeco: rgba(248,113,113,0.4);
+        
+        --caretColor: #E2B715;
+        --caretShadow: rgba(226, 183, 21, 0.3);
+        
+        --btnHoverBg: rgba(255,255,255,0.04);
+        --btnHoverColor: #ccc;
+        --btnActiveColor: #aaa;
+        --btnHoverBorder: #7a7b7e;
+        --lengthBtnHoverBorder: #656669;
+        
+        --logoZenColor: #656669;
+      }
+
+      .light {
+        --bg: #F4F4F5;
+        --surface: #E4E4E7;
+        --border: #D4D4D8;
+        --borderLight: #A1A1AA;
+        --navBorder: rgba(0, 0, 0, 0.06);
+        --text: #18181B;
+        --dim: #71717A;
+        --dimLight: #52525B;
+        --dimDark: #A1A1AA;
+        --dimMid: #52525B;
+        --muted: #D4D4D8;
+        --statText: #3F3F46;
+        --green: #CA8A04; 
+        --red: #EF4444; 
+        --yellow: #CA8A04; 
+        
+        --charNeutral: #A1A1AA; 
+        --charCorrect: #52525B; 
+        --charWrongDeco: rgba(239, 68, 68, 0.4);
+        
+        --caretColor: #CA8A04;
+        --caretShadow: rgba(202, 138, 4, 0.3);
+        
+        --btnHoverBg: rgba(0,0,0,0.04);
+        --btnHoverColor: #18181B;
+        --btnActiveColor: #3F3F46;
+        --btnHoverBorder: #A1A1AA;
+        --lengthBtnHoverBorder: #A1A1AA;
+
+        --logoZenColor: #A1A1AA;
+      }
+
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html {
         scroll-behavior: smooth;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background: var(--bg);
       }
       button:focus,
       button:focus-visible {
         outline: none;
       }
       body {
-        background: #333437;
+        background: var(--bg);
+        color: var(--text);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
         overflow-x: hidden;
+        transition: background 0.4s ease, color 0.4s ease;
       }
 
       /* ── GPU layer promotion for all animated elements ── */
@@ -71,8 +141,8 @@ export default function GlobalStyles() {
         pointer-events: none;
         z-index: 2;
         border-radius: 2px;
-        background: #E2B715;
-        box-shadow: 0 0 8px rgba(226, 183, 21, 0.3);
+        background: var(--caretColor);
+        box-shadow: 0 0 8px var(--caretShadow);
         transition: transform 0.12s linear,
                     height 0.06s linear;
         will-change: transform, height, opacity;
@@ -158,7 +228,7 @@ export default function GlobalStyles() {
       /* Keep logo visible but very faded, exactly where it is */
       .zen-mode .app-logo {
         opacity: 0.15 !important;
-        color: #656669 !important;
+        color: var(--logoZenColor) !important;
         transform: translate3d(0, 0, 0);
         transition:
           opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -211,12 +281,12 @@ export default function GlobalStyles() {
           opacity 0.18s ease !important;
       }
       .nav-btn:hover {
-        border-color: #7a7b7e;
-        color: #bbb;
+        border-color: var(--btnHoverBorder);
+        color: var(--btnHoverColor);
       }
       .length-btn:hover {
-        border-color: #656669;
-        color: #aaa;
+        border-color: var(--lengthBtnHoverBorder);
+        color: var(--btnActiveColor);
       }
 
       /* ── Ultra-smooth char color transitions ────────────── */

@@ -17,10 +17,15 @@
 // easily without touching TypingTrainer itself.
 // ----------------------------------------------------------------------------
 
-import TypingTrainer from './TypingTrainer'
+import TypingTrainer from "./TypingTrainer";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
-  return <TypingTrainer />
+  return (
+    <ThemeProvider>
+      <TypingTrainer />
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

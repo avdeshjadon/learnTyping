@@ -38,10 +38,10 @@ export const appStyle = {
 export const headerStyle = {
   display: "flex",
   alignItems: "center",
-  gap: 24,
+  justifyContent:
+    "space-between" /* Changed from gap: 24 to space-between for 3 clear sections */,
   padding: "14px 32px",
-  borderBottom: `1px solid ${TOKENS.borderLight}`,
-  flexWrap: "wrap",
+  borderBottom: "1px solid var(--navBorder)",
   position: "relative",
   zIndex: 10,
   maxWidth: 1300,
@@ -50,6 +50,7 @@ export const headerStyle = {
 };
 
 export const logoStyle = {
+  flex: 1, // Let logo take 1/3
   fontSize: 28,
   fontWeight: 400,
   fontFamily: "'Roboto Mono', 'JetBrains Mono', monospace",
@@ -61,7 +62,14 @@ export const logoStyle = {
   alignItems: "center",
 };
 
-export const navStyle = { display: "flex", gap: 4, flex: 1, flexWrap: "wrap" };
+export const navStyle = {
+  display: "flex",
+  flex: 1, // Let nav take 1/3
+  justifyContent: "center", // Center exactly
+  flexWrap: "wrap",
+  position: "relative",
+  zIndex: 20,
+};
 
 export const navBtnStyle = {
   background: "none",
@@ -116,11 +124,17 @@ export const navDropdownItemStyle = {
 };
 
 export const navDropdownItemActiveStyle = {
-  color: "#ccc",
-  background: "rgba(255,255,255,0.04)",
+  color: "var(--btnHoverColor)",
+  background: "var(--btnHoverBg)",
 };
 
-export const controlsStyle = { display: "flex", alignItems: "center", gap: 12 };
+export const controlsStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 12,
+  flex: 1, // Let controls take 1/3
+  justifyContent: "flex-end", // Align to right
+};
 
 export const lengthGroupStyle = { display: "flex", gap: 2 };
 
@@ -139,7 +153,10 @@ export const lengthBtnStyle = {
   transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
 };
 
-export const lengthBtnActiveStyle = { borderColor: TOKENS.dim, color: "#aaa" };
+export const lengthBtnActiveStyle = {
+  borderColor: TOKENS.dim,
+  color: "var(--btnActiveColor)",
+};
 
 export const iconBtnStyle = {
   background: "none",
@@ -240,18 +257,18 @@ export const textAreaStyle = {
 };
 
 export const charStyle = {
-  color: "#656669",
+  color: "var(--charNeutral)",
   display: "inline",
   transition: "color 0.06s cubic-bezier(0.16, 1, 0.3, 1)",
   position: "relative",
 };
 
-export const charCorrectStyle = { color: "#D1D0C5" };
+export const charCorrectStyle = { color: "var(--charCorrect)" };
 
 export const charWrongStyle = {
   color: TOKENS.red,
   textDecoration: "underline",
-  textDecorationColor: "rgba(248,113,113,0.4)",
+  textDecorationColor: "var(--charWrongDeco)",
 };
 
 export const charReviewStyle = { color: TOKENS.yellow };
@@ -259,7 +276,7 @@ export const charReviewStyle = { color: TOKENS.yellow };
 // ─── Footer ─────────────────────────────────────────────────────────────────
 
 export const footerStyle = {
-  padding: "8px 32px 12px",
+  padding: "12px 32px",
   textAlign: "center",
   position: "absolute",
   bottom: 0,
@@ -268,10 +285,11 @@ export const footerStyle = {
   margin: "0 auto", // Center it horizontally
   maxWidth: 1300, // Match max-width of header
   width: "100%",
+  borderTop: "1px solid var(--navBorder)",
 };
 
 export const footerHintStyle = {
   fontSize: 10,
-  color: "#656669",
+  color: "var(--charNeutral)",
   letterSpacing: "0.08em",
 };

@@ -34,7 +34,11 @@ export const resultTitleStyle = {
   textTransform: "lowercase",
 };
 
-export const resultStatsStyle = { display: "flex", alignItems: "center", gap: 0 };
+export const resultStatsStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 0,
+};
 
 export const resultStatStyle = {
   display: "flex",
