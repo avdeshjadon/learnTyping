@@ -202,8 +202,16 @@ export default function useTypingSession() {
         e.preventDefault();
         const c = cursorRef.current;
         if (c === 0) return;
+
         const newStates = [...charStatesRef.current];
-        newStates[c - 1] = CHAR_STATE.REVIEW;
+
+        // If we are backspacing a wrong character, decrement the error count
+        // so accuracy isn't unfairly penalized for corrected mistakes.
+        if (newStates[c - 1] === CHAR_STATE.WRONG && errorsRef.current > 0) {
+          setErrors((er) => er - 1);
+        }
+
+        newStates[c - 1] = CHAR_STATE.IDLE;
         setCharStates(newStates);
         setCursor(c - 1);
         triggerFlash("⌫", null);

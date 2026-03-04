@@ -49,7 +49,8 @@ export default function Header({
   isTyping,
 }) {
   const { theme, toggleTheme } = useTheme();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const CATEGORIES = [...new Set(MODES.map((m) => m.category))];
+  const [activeCategoryDropdown, setActiveCategoryDropdown] = useState(null);
   const dropdownRef = useRef(null);
   const rowRef = useRef(null);
 
@@ -61,7 +62,7 @@ export default function Header({
         rowRef.current && rowRef.current.contains(event.target);
 
       if (!isClickOnToggle && !isClickOnRow) {
-        setIsDropdownOpen(false);
+        setActiveCategoryDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -76,7 +77,9 @@ export default function Header({
       style={{
         ...headerStyle,
         background: "var(--bg)", // Hide shadow from row behind it
-        borderBottomColor: isDropdownOpen ? "transparent" : "var(--navBorder)",
+        borderBottomColor: activeCategoryDropdown
+          ? "transparent"
+          : "var(--navBorder)",
         transition:
           "border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease",
       }}
@@ -118,71 +121,92 @@ export default function Header({
         </svg>
         PracticeTyping
       </div>
-      <nav style={navStyle}>
-        <div
-          ref={dropdownRef}
-          style={{ position: "relative", display: "inline-block" }}
-        >
+      <nav
+        style={{ ...navStyle, gap: 12, flexWrap: "nowrap" }}
+        ref={dropdownRef}
+      >
+        {CATEGORIES.map((category) => {
+          const isActive = activeCategoryDropdown === category;
+          const isCurrentModeCategory = mode.category === category;
+          return (
+            <div
+              key={category}
+              style={{ position: "relative", display: "inline-block" }}
+            >
+              <button
+                onClick={() =>
+                  setActiveCategoryDropdown(isActive ? null : category)
+                }
+                className="nav-btn"
+                style={{
+                  ...navBtnStyle,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                  gap: 6,
+                  background:
+                    isActive || isCurrentModeCategory
+                      ? "var(--surface)"
+                      : "transparent",
+                  color:
+                    isActive || isCurrentModeCategory
+                      ? "var(--text)"
+                      : "var(--dimLight)",
+                  borderColor:
+                    isActive || isCurrentModeCategory
+                      ? "var(--dim)"
+                      : "var(--muted)",
+                }}
+              >
+                {category}
+              </button>
+            </div>
+          );
+        })}
+      </nav>
+      <div className="header-controls" style={controlsStyle}>
+        {!isTyping && (
           <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="nav-btn"
+            onClick={() => onNextStory()}
+            title="Next story"
             style={{
-              ...navBtnStyle,
+              background: "none",
+              border: "none",
+              color: "#656669",
+              cursor: "pointer",
+              padding: "4px 8px",
+              fontSize: 16,
+              lineHeight: 1,
+              borderRadius: 4,
+              transition:
+                "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
               display: "inline-flex",
               alignItems: "center",
-              gap: 6,
-              background: isDropdownOpen ? "var(--surface)" : "transparent",
-              color: isDropdownOpen ? "var(--text)" : "var(--dimLight)",
-              borderColor: isDropdownOpen ? "var(--dim)" : "var(--muted)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#E2B715";
+              e.currentTarget.style.transform = "translateX(3px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "#656669";
+              e.currentTarget.style.transform = "translateX(0)";
             }}
           >
-            {mode.label}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polygon points="5 4 15 12 5 20 5 4" />
+              <line x1="19" y1="5" x2="19" y2="19" />
+            </svg>
           </button>
-        </div>
-      </nav>
-      {!isTyping && (
-        <button
-          onClick={() => onNextStory()}
-          title="Next story"
-          style={{
-            background: "none",
-            border: "none",
-            color: "#656669",
-            cursor: "pointer",
-            padding: "4px 8px",
-            fontSize: 16,
-            lineHeight: 1,
-            borderRadius: 4,
-            transition:
-              "color 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-            display: "inline-flex",
-            alignItems: "center",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#E2B715";
-            e.currentTarget.style.transform = "translateX(3px)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#656669";
-            e.currentTarget.style.transform = "translateX(0)";
-          }}
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polygon points="5 4 15 12 5 20 5 4" />
-            <line x1="19" y1="5" x2="19" y2="19" />
-          </svg>
-        </button>
-      )}
-      <div className="header-controls" style={controlsStyle}>
+        )}
         <button
           onClick={toggleTheme}
           title="Toggle Theme"
@@ -274,13 +298,13 @@ export default function Header({
           justifyContent: "center",
           flexWrap: "wrap",
           gap: 12,
-          padding: isDropdownOpen ? "16px 32px" : "0 32px",
-          maxHeight: isDropdownOpen ? 300 : 0,
-          opacity: isDropdownOpen ? 1 : 0,
+          padding: activeCategoryDropdown ? "16px 32px" : "0 32px",
+          maxHeight: activeCategoryDropdown ? 300 : 0,
+          opacity: activeCategoryDropdown ? 1 : 0,
           overflow: "hidden",
           transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
-          pointerEvents: isDropdownOpen ? "auto" : "none",
-          boxShadow: isDropdownOpen
+          pointerEvents: activeCategoryDropdown ? "auto" : "none",
+          boxShadow: activeCategoryDropdown
             ? theme === "light"
               ? "none"
               : "0 10px 30px rgba(0,0,0,0.08)"
@@ -288,12 +312,12 @@ export default function Header({
           zIndex: 9,
         }}
       >
-        {MODES.map((m) => (
+        {MODES.filter((m) => m.category === activeCategoryDropdown).map((m) => (
           <button
             key={m.id}
             onClick={() => {
               onSwitchMode(m);
-              setIsDropdownOpen(false);
+              setActiveCategoryDropdown(null);
             }}
             style={{
               ...navDropdownItemStyle,
